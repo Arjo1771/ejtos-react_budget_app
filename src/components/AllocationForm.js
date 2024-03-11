@@ -9,29 +9,32 @@ const AllocationForm = (props) => {
     const [action, setAction] = useState('');
 
     const submitEvent = () => {
-
-            if(cost > remaining) {
-                alert("The value cannot exceed remaining funds  £"+remaining);
-                setCost("");
-                return;
-            }
-
+        
+    
+        if (cost > remaining) {
+            alert("The value cannot exceed remaining funds" + remaining);
+            setCost("");
+            return;
+        }
+    
         const expense = {
             name: name,
             cost: parseInt(cost),
         };
-        if(action === "Reduce") {
+    
+        if (action === "Reduce") {
             dispatch({
                 type: 'RED_EXPENSE',
                 payload: expense,
             });
         } else {
-                dispatch({
-                    type: 'ADD_EXPENSE',
-                    payload: expense,
-                });
-            }
+            dispatch({
+                type: 'ADD_EXPENSE',
+                payload: expense,
+            });
+        }
     };
+    
 
     return (
         <div>
@@ -58,15 +61,19 @@ const AllocationForm = (props) => {
                         <option defaultValue value="Add" name="Add">Add</option>
                 <option value="Reduce" name="Reduce">Reduce</option>
                   </select>
-
+                  
+                  <div className="currencyprefix" style={{marginLeft:'2rem'}}></div>
+                <span>£</span>
                     <input
-                        required='required'
-                        type='number'
-                        id='cost'
-                        value={cost}
-                        style={{ marginLeft: '2rem' , size: 10}}
-                        onChange={(event) => setCost(event.target.value)}>
-                        </input>
+                            required='required'
+                            type='number'
+                            id='cost'
+                            value={cost}
+                            style={{ marginLeft: '0.2rem', size: 10 }}
+                            onChange={(event) => setCost(event.target.value)}
+                             />
+                     
+                        
 
                     <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }}>
                         Save
